@@ -18,6 +18,7 @@ describe('DetailComment entities', () => {
       date: 123,
       content: 'komentar',
       is_delete: 'true',
+      like_count: '0',
     };
 
     expect(() => new DetailComment(payload)).toThrowError('DETAIL_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION');
@@ -30,6 +31,7 @@ describe('DetailComment entities', () => {
       date: new Date(),
       content: 'komentar',
       is_delete: false,
+      like_count: '1',
     };
 
     const detailComment = new DetailComment(payload);
@@ -39,6 +41,7 @@ describe('DetailComment entities', () => {
     expect(detailComment.username).toEqual(payload.username);
     expect(detailComment.date).toEqual(payload.date);
     expect(detailComment.content).toEqual(payload.content);
+    expect(detailComment.likeCount).toEqual(1);
   });
 
   it('should replace content with "**komentar telah dihapus**" when is_delete is true', () => {
@@ -48,6 +51,7 @@ describe('DetailComment entities', () => {
       date: new Date(),
       content: 'komentar',
       is_delete: true,
+      like_count: '2',
     };
 
     const detailComment = new DetailComment(payload);
@@ -57,5 +61,6 @@ describe('DetailComment entities', () => {
     expect(detailComment.username).toEqual(payload.username);
     expect(detailComment.date).toEqual(payload.date);
     expect(detailComment.content).toEqual('**komentar telah dihapus**');
+    expect(detailComment.likeCount).toEqual(2);
   });
 });

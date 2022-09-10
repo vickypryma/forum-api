@@ -82,6 +82,7 @@ describe('CommentRepositoryPostgres', () => {
       expect(comments[0].content).toEqual('ini komentar');
       expect(comments[0].username).toEqual('dicoding');
       expect(comments[0].date).toEqual(new Date('2022=09-02 12:00'));
+      expect(comments[0].likeCount).toEqual(0);
     });
   });
 

@@ -20,6 +20,7 @@ describe('GetThreadDetailUseCase', () => {
           content: 'ini komentar',
           date: new Date('2022-09-02 12:00'),
           username: 'vicky',
+          likeCount: 1,
           replies: [
             new DetailReply({
               id: 'reply-123',
@@ -54,6 +55,7 @@ describe('GetThreadDetailUseCase', () => {
           date: new Date('2022-09-02 12:00'),
           username: 'vicky',
           is_delete: false,
+          like_count: '1',
         }),
       ]));
 
