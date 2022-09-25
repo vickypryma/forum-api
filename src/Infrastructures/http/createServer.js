@@ -8,6 +8,7 @@ const threads = require('../../Interfaces/http/api/threads');
 const comments = require('../../Interfaces/http/api/comments');
 const replies = require('../../Interfaces/http/api/replies');
 const commentLikes = require('../../Interfaces/http/api/comment_likes');
+const rateLimiter = require('../../Interfaces/http/plugin/rateLimiter');
 
 const createServer = async (container) => {
   const server = Hapi.server({
@@ -18,6 +19,12 @@ const createServer = async (container) => {
   await server.register([
     {
       plugin: Jwt,
+    },
+    {
+      plugin: rateLimiter,
+      options: {
+        paths: ['threads'],
+      },
     },
   ]);
 
