@@ -5,9 +5,9 @@ const redis = require('redis');
 
 const redisClient = redis.createClient({
   enable_offline_queue: false,
-  socket: {
-    host: process.env.REDIS_SERVER,
-  },
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+  password: process.env.REDIS_PASSWORD,
 });
 
 redisClient.on('error', (error) => {
