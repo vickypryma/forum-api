@@ -1,8 +1,21 @@
 /* istanbul ignore file */
 const Boom = require('@hapi/boom');
-const { RateLimiterMemory } = require('rate-limiter-flexible');
+const { RateLimiterRedis } = require('rate-limiter-flexible');
+const redis = require('redis');
 
-const rateLimiter = new RateLimiterMemory({
+const redisClient = redis.createClient({
+  enable_offline_queue: false,
+  socket: {
+    host: process.env.REDIS_SERVER,
+  },
+});
+
+redisClient.on('error', (error) => {
+  console.error(error);
+});
+
+const rateLimiter = new RateLimiterRedis({
+  storeClient: redisClient,
   points: 90,
   duration: 60,
 });
